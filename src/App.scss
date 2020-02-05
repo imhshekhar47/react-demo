@@ -1,24 +1,42 @@
-$bg-color: #282c34;
+@import "scss/colors";
 
-.App {
+.app {
   text-align: center;
+  color: $bg-color;
+
+  .app-header {
+    background-color: $bg-primary-color;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+
+  .app-main {
+    min-height: 50vh;
+  }
+
+  .app-footer {
+    background-color: $bg-secondary-color;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+    .footer-section {
+      width: 30vh;
+    }
+  }
+  
 }
 
-.App-logo {
-  height: 40vmin;
-}
 
-.App-header {
-  background-color: $bg-color;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #09d3ac;
-}
+
+
+
