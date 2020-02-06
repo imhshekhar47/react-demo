@@ -36,8 +36,8 @@ const styles = theme => ({
 
 class SignIn extends React.Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             signInForm: {
                 username: '',
@@ -47,17 +47,17 @@ class SignIn extends React.Component {
     }
 
     onFormControlChange = event => {
-        const {target} = event
+        const { target } = event
         let newFormState
-        switch(target.name) {
+        switch (target.name) {
             case 'username':
-                newFormState = {...this.state.signInForm, username: `${target.value}`};
+                newFormState = { ...this.state.signInForm, username: `${target.value}` };
                 break;
             case 'password':
-                newFormState = {...this.state.signInForm, password: `${target.value}`};
+                newFormState = { ...this.state.signInForm, password: `${target.value}` };
                 break;
             default:
-                newFormState = {...this.state.signInForm};
+                newFormState = { ...this.state.signInForm };
                 console.log(`Invalid form control ${target.name}`)
         }
 
@@ -68,40 +68,47 @@ class SignIn extends React.Component {
 
     onFormSubmit = event => {
         event.preventDefault()
-        console.log(this.state.signInForm)
+        const user = { username: this.state.signInForm.username, password: this.state.signInForm.password }
+        this.props.authCheck(user)
     }
 
+    /*
+    componentDidMount() {
+        console.log('Sign In form is loaded')
+    }
+    */
+   
     render() {
         const { classes } = this.props;
         const { signInForm } = this.state;
         return (
-                <Box className={classes.box}>
-                    <Typography variant="h5" className={classes.title}>Sign In</Typography>
-                    <form noValidate className={classes.form} onSubmit={this.onFormSubmit}>
-                        <Grid container>
-                            <Grid item xs={12}>
-                                <TextField className={classes.field} variant="outlined" id="username" name="username"  label="Username" 
-                                    value={signInForm.username}
-                                    onChange={this.onFormControlChange}
-                                    fullWidth />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField className={classes.field} variant="outlined" type="password" id="password" name="password" label="Password"  
-                                    value={signInForm.password}
-                                    onChange={this.onFormControlChange}
-                                    fullWidth />
-                            </Grid>
-
-                            <Grid item xs={8}>
-                                <Link variane="body2" href="#" onClick={() => this.props.onChoiceChange(false)}>Do not have an account? Sign Up</Link>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <Button type="submit" variant="contained" color="primary" fullWidth>Login</Button>
-                            </Grid>
+            <Box className={classes.box}>
+                <Typography variant="h5" className={classes.title}>Sign In</Typography>
+                <form noValidate className={classes.form} onSubmit={this.onFormSubmit}>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <TextField className={classes.field} variant="outlined" id="username" name="username" label="Username"
+                                value={signInForm.username}
+                                onChange={this.onFormControlChange}
+                                fullWidth />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField className={classes.field} variant="outlined" type="password" id="password" name="password" label="Password"
+                                value={signInForm.password}
+                                onChange={this.onFormControlChange}
+                                fullWidth />
                         </Grid>
 
-                    </form>
-                </Box>
+                        <Grid item xs={8}>
+                            <Link variane="body2" href="#" onClick={() => this.props.onChoiceChange(false)}>Do not have an account? Sign Up</Link>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Button type="submit" variant="contained" color="primary" fullWidth>Login</Button>
+                        </Grid>
+                    </Grid>
+
+                </form>
+            </Box>
         );
     }
 }
@@ -113,7 +120,7 @@ class SignUp extends React.Component {
 
         this.state = {
             signUpForm: {
-                firstName: '', 
+                firstName: '',
                 lastName: '',
                 email: '',
                 password: '',
@@ -129,26 +136,26 @@ class SignUp extends React.Component {
     }
 
     onFormControlChange = event => {
-        const { target }  = event
-        let newState 
-        switch(target.name) {
-            case 'firstName': 
-                newState = {...this.state.signUpForm, firstName: `${target.value}`}; 
+        const { target } = event
+        let newState
+        switch (target.name) {
+            case 'firstName':
+                newState = { ...this.state.signUpForm, firstName: `${target.value}` };
                 break;
-            case 'lastName': 
-                newState = {...this.state.signUpForm, lastName: `${target.value}`};  
+            case 'lastName':
+                newState = { ...this.state.signUpForm, lastName: `${target.value}` };
                 break;
             case 'email':
-                newState = {...this.state.signUpForm, email: `${target.value}`};  
+                newState = { ...this.state.signUpForm, email: `${target.value}` };
                 break;
             case 'password':
-                newState = {...this.state.signUpForm, password: `${target.value}`};  
+                newState = { ...this.state.signUpForm, password: `${target.value}` };
                 break;
             case 'passwordCnf':
-                newState = {...this.state.signUpForm, passwordCnf: `${target.value}`};  
+                newState = { ...this.state.signUpForm, passwordCnf: `${target.value}` };
                 break;
-            default: 
-                newState = {...this.state.signUpForm}
+            default:
+                newState = { ...this.state.signUpForm }
                 console.log(`Invalid control ${target.name}`)
         }
 
@@ -161,54 +168,60 @@ class SignUp extends React.Component {
         event.preventDefault()
         console.log(this.state.signUpForm)
     }
-
+    
+    /*
+    componentDidMount() {
+        console.log('Sign Up form is loaded')
+    }
+    */
+    
     render() {
         const { classes } = this.props
         const { signUpForm } = this.state
         return (
-                <Box className={classes.box}>
-                    <Typography variant="h5" className={classes.title}>Sign Up</Typography>
-                    <form noValidate className={classes.form} onSubmit={this.onFormSubmit}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={6}>
-                                <TextField variant="outlined" id="firstName" name="firstName" label="First Name"
-                                    value={signUpForm.firstName} 
-                                    onChange={this.onFormControlChange}
-                                    fullWidth />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField variant="outlined" id="lastName" name="lastName" label="Last Name" 
-                                    value={signUpForm.lastName}
-                                    onChange={this.onFormControlChange}
-                                    fullWidth />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField variant="outlined" id="email" name="email" label="Email" 
-                                    value={signUpForm.email}
-                                    onChange={this.onFormControlChange}
-                                    fullWidth />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField variant="outlined" type="password" id="password" name="password" label="Password" 
-                                    value={signUpForm.password}
-                                    onChange={this.onFormControlChange}
-                                    fullWidth />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField variant="outlined" type="password" id="passwordCnf" name="passwordCnf" label="Confirm Password" 
-                                    value={signUpForm.passwordCnf}
-                                    onChange={this.onFormControlChange}
-                                    fullWidth />
-                            </Grid>
-                            <Grid item xs={8}>
-                                <Link variant="body2" href='#' onClick={this.props.onChoiceChange}>Already have an account? Sign In</Link>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <Button type="submit" variant="contained" color="primary" fullWidth>Submit</Button>
-                            </Grid>
+            <Box className={classes.box}>
+                <Typography variant="h5" className={classes.title}>Sign Up</Typography>
+                <form noValidate className={classes.form} onSubmit={this.onFormSubmit}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                            <TextField variant="outlined" id="firstName" name="firstName" label="First Name"
+                                value={signUpForm.firstName}
+                                onChange={this.onFormControlChange}
+                                fullWidth />
                         </Grid>
-                    </form>
-                </Box>
+                        <Grid item xs={6}>
+                            <TextField variant="outlined" id="lastName" name="lastName" label="Last Name"
+                                value={signUpForm.lastName}
+                                onChange={this.onFormControlChange}
+                                fullWidth />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField variant="outlined" id="email" name="email" label="Email"
+                                value={signUpForm.email}
+                                onChange={this.onFormControlChange}
+                                fullWidth />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField variant="outlined" type="password" id="password" name="password" label="Password"
+                                value={signUpForm.password}
+                                onChange={this.onFormControlChange}
+                                fullWidth />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField variant="outlined" type="password" id="passwordCnf" name="passwordCnf" label="Confirm Password"
+                                value={signUpForm.passwordCnf}
+                                onChange={this.onFormControlChange}
+                                fullWidth />
+                        </Grid>
+                        <Grid item xs={8}>
+                            <Link variant="body2" href='#' onClick={this.props.onChoiceChange}>Already have an account? Sign In</Link>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Button type="submit" variant="contained" color="primary" fullWidth>Submit</Button>
+                        </Grid>
+                    </Grid>
+                </form>
+            </Box>
         )
     }
 }
@@ -219,8 +232,8 @@ const SignUpComponent = withStyles(styles)(SignUp)
 
 class Login extends React.Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             ifSignIn: false
@@ -232,17 +245,15 @@ class Login extends React.Component {
     onOptionChange(isSignIn) {
         this.setState({
             ifSignIn: isSignIn
-        }, () => {
-            console.log(`Changing the ifSignIn to ${this.state.ifSignIn}`)
         })
     }
 
     render() {
         const { classes } = this.props
 
-        let componentToRender 
+        let componentToRender
         if (this.state.ifSignIn) {
-            componentToRender = <SignInComponent onChoiceChange={this.onOptionChange}></SignInComponent>
+            componentToRender = <SignInComponent onChoiceChange={this.onOptionChange} authCheck={this.props.authCheck}></SignInComponent>
         } else {
             componentToRender = <SignUpComponent onChoiceChange={this.onOptionChange}></SignUpComponent>
         }
