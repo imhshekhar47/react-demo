@@ -1,8 +1,9 @@
 @import "scss/colors";
 
 .app {
-  text-align: center;
+  background-color: $bg-secondary-color;
   color: $bg-color;
+  height: 100vh;
 
   .app-header {
     background-color: $bg-primary-color;

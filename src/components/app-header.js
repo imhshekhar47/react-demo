@@ -15,12 +15,12 @@ const styles = theme => ({
 
 class AppHeader extends React.Component {
     render() {
-        const { classes } = this.props;
+        const { classes, title } = this.props;
         return (
             <AppBar position="static" color="primary" elevation={0}>
                 <Toolbar color="primary">
                     <IconButton edge="start" color="inherit"><MenuIcon></MenuIcon></IconButton>
-                    <Typography variant="h6" className={classes.flex}>ReactApp</Typography>
+                    <Typography variant="h6" className={classes.flex}>{title}</Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
