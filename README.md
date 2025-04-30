@@ -1,2 +1,2 @@
 # react-demo
-Simple react application
+Simple react application using react js
